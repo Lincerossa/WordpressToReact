@@ -10,10 +10,7 @@ class Content extends Component {
   constructor(props){
 
     super(props)
-
     this.state = {
-      slug: null,
-      taxonomy: null
     }
 
   }
@@ -30,34 +27,17 @@ class Content extends Component {
 
       .then(spread( (posts, pages, categories) => {
 
-        const routes = slug => ({ slug: slug })
+        const postRoutes = posts.data.map( ({ slug }) => ({ slug: `/${slug}` }) )
+        const pageRoutes = pages.data.map( ({ slug }) => ({ slug: `/${slug}` }) )
+        const categoryRoutes = categories.data.map( ({ slug }) => ({ slug: `/${slug}` }) )
 
-        const postRoutes = posts.data.map( ({slug}) => {
-          return{
-            slug: slug
-          }
+        this.setState({
+          postRoutes,
+          pageRoutes,
+          categoryRoutes,
         })
-
-        const pageRoutes = pages.data.map( ({slug}) => {
-          return{
-            slug: slug
-          }
-        })
-
-        const categoryRoutes = categories.data.map( ({slug}) => {
-          return{
-            slug: slug
-          }
-        })
-
-
-        console.log('posts--->',postRoutes)
-        console.log('categories--->',categoryRoutes)
-        console.log('pages--->',pageRoutes)
 
       }))
-
-
 
   }
 
@@ -67,25 +47,21 @@ class Content extends Component {
   
   render(){
 
-    const { slug, taxonomy } = this.state
+    const { postRoutes, pageRoutes, categoryRoutes } = this.state
 
     return(
-    	<Switch>  
+    	<Switch> 
         {
-          slug && taxonomy=="post" &&
-          <Route exact path={slug} component={Posts}/>
+          postRoutes && postRoutes.length &&
+          postRoutes.map( post => <Route exact path={post.slug} component={Posts}/> )
         }
         {
-          slug && taxonomy=="post" &&
-          <Route exact path={slug} component={Posts}/>
+          pageRoutes && pageRoutes.length &&
+          pageRoutes.map( page => <Route exact path={page.slug} component={Posts}/> )
         }
         {
-          slug && taxonomy=="post" &&
-          <Route exact path={slug} component={Posts}/>
-        }
-        {
-          slug && taxonomy=="post" &&
-          <Route exact path={slug} component={Posts}/>
+          categoryRoutes && categoryRoutes.length &&
+          categoryRoutes.map( category => <Route exact path={category.slug} component={Posts}/> )
         }
       </Switch>
     )

@@ -3097,10 +3097,7 @@ var Content = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
 
-    _this.state = {
-      slug: null,
-      taxonomy: null
-    };
+    _this.state = {};
 
     return _this;
   }
@@ -3108,6 +3105,7 @@ var Content = function (_Component) {
   _createClass(Content, [{
     key: 'fetchData',
     value: function fetchData() {
+      var _this2 = this;
 
       var api = function api(type) {
         return 'http://192.168.33.10/wordpress/wp-json/wp/v2/' + type;
@@ -3125,37 +3123,24 @@ var Content = function (_Component) {
 
       (0, _axios.all)([getPosts(), getPages(), getCategories()]).then((0, _axios.spread)(function (posts, pages, categories) {
 
-        var routes = function routes(slug) {
-          return { slug: slug };
-        };
-
         var postRoutes = posts.data.map(function (_ref) {
           var slug = _ref.slug;
-
-          return {
-            slug: slug
-          };
+          return { slug: '/' + slug };
         });
-
         var pageRoutes = pages.data.map(function (_ref2) {
           var slug = _ref2.slug;
-
-          return {
-            slug: slug
-          };
+          return { slug: '/' + slug };
         });
-
         var categoryRoutes = categories.data.map(function (_ref3) {
           var slug = _ref3.slug;
-
-          return {
-            slug: slug
-          };
+          return { slug: '/' + slug };
         });
 
-        console.log('posts--->', postRoutes);
-        console.log('categories--->', categoryRoutes);
-        console.log('pages--->', pageRoutes);
+        _this2.setState({
+          postRoutes: postRoutes,
+          pageRoutes: pageRoutes,
+          categoryRoutes: categoryRoutes
+        });
       }));
     }
   }, {
@@ -3167,17 +3152,23 @@ var Content = function (_Component) {
     key: 'render',
     value: function render() {
       var _state = this.state,
-          slug = _state.slug,
-          taxonomy = _state.taxonomy;
+          postRoutes = _state.postRoutes,
+          pageRoutes = _state.pageRoutes,
+          categoryRoutes = _state.categoryRoutes;
 
 
       return _react2.default.createElement(
         _reactRouterDom.Switch,
         null,
-        slug && taxonomy == "post" && _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: slug, component: _components.Posts }),
-        slug && taxonomy == "post" && _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: slug, component: _components.Posts }),
-        slug && taxonomy == "post" && _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: slug, component: _components.Posts }),
-        slug && taxonomy == "post" && _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: slug, component: _components.Posts })
+        postRoutes && postRoutes.length && postRoutes.map(function (post) {
+          return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: post.slug, component: _components.Posts });
+        }),
+        pageRoutes && pageRoutes.length && pageRoutes.map(function (page) {
+          return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: page.slug, component: _components.Posts });
+        }),
+        categoryRoutes && categoryRoutes.length && categoryRoutes.map(function (category) {
+          return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: category.slug, component: _components.Posts });
+        })
       );
     }
   }]);
