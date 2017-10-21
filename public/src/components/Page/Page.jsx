@@ -7,7 +7,7 @@ const Page = (props) => {
 
   return(
     <div className={page}>
-      <p>Qui metto lista di categories</p>
+      <p>Qui metto lista di pag</p>
     </div>
   )
 }
