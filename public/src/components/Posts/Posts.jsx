@@ -23,7 +23,6 @@ class Posts extends Component {
 
     get(ENDPOINT)
       .then( ({ data }) => {
-        console.log('dati', data)
         this.setState({
           posts: data
         })
@@ -39,8 +38,6 @@ class Posts extends Component {
   }
 
   render(){
-
-    console.warn("ecco i posts",this.state.posts)
 
     return(
       <div> 

@@ -3108,60 +3108,55 @@ var Content = function (_Component) {
   _createClass(Content, [{
     key: 'fetchData',
     value: function fetchData() {
-      var _this2 = this;
 
-      var slug = window.location.pathname.slice(1);
-
-      var endPoint = function endPoint(taxonomy) {
-        return 'http://192.168.33.10/wordpress/wp-json/wp/v2/' + taxonomy + '?slug=' + slug;
+      var api = function api(type) {
+        return 'http://192.168.33.10/wordpress/wp-json/wp/v2/' + type;
       };
 
-      var posts = endPoint('posts');
-      var pages = endPoint('pages');
-      var categories = endPoint('categories');
+      var getPosts = function getPosts() {
+        return (0, _axios.get)(api('posts'));
+      };
+      var getPages = function getPages() {
+        return (0, _axios.get)(api('pages'));
+      };
+      var getCategories = function getCategories() {
+        return (0, _axios.get)(api('categories'));
+      };
 
-      var checktaxonomy = [posts, pages, categories];
+      (0, _axios.all)([getPosts(), getPages(), getCategories()]).then((0, _axios.spread)(function (posts, pages, categories) {
 
-      (0, _axios.get)(checktaxonomy[0]).then(function (_ref) {
-        var data = _ref.data;
+        var routes = function routes(slug) {
+          return { slug: slug };
+        };
 
-        if (data.length) {
-          console.log("OKOKOKOK", data[0].taxonomy);
-          _this2.setState({
-            taxonomy: data[0].taxonomy
-          });
-        }
-      }).catch(function (error) {
-        console.log(error);
-      });
+        var postRoutes = posts.data.map(function (_ref) {
+          var slug = _ref.slug;
 
-      (0, _axios.get)(checktaxonomy[1]).then(function (_ref2) {
-        var data = _ref2.data;
-
-        if (data.length) {
-          console.log("OKOKOKOK", data[0].taxonomy);
-          _this2.setState({
-            taxonomy: data[0].taxonomy,
+          return {
             slug: slug
-          });
-        }
-      }).catch(function (error) {
-        console.log(error);
-      });
+          };
+        });
 
-      (0, _axios.get)(checktaxonomy[2]).then(function (_ref3) {
-        var data = _ref3.data;
+        var pageRoutes = pages.data.map(function (_ref2) {
+          var slug = _ref2.slug;
 
-        if (data.length) {
-          console.log("OKOKOKOK", data[0].taxonomy);
-          _this2.setState({
-            taxonomy: data[0].taxonomy,
+          return {
             slug: slug
-          });
-        }
-      }).catch(function (error) {
-        console.log(error);
-      });
+          };
+        });
+
+        var categoryRoutes = categories.data.map(function (_ref3) {
+          var slug = _ref3.slug;
+
+          return {
+            slug: slug
+          };
+        });
+
+        console.log('posts--->', postRoutes);
+        console.log('categories--->', categoryRoutes);
+        console.log('pages--->', pageRoutes);
+      }));
     }
   }, {
     key: 'componentDidMount',
@@ -27374,7 +27369,6 @@ var Posts = function (_Component) {
       (0, _axios.get)(ENDPOINT).then(function (_ref) {
         var data = _ref.data;
 
-        console.log('dati', data);
         _this2.setState({
           posts: data
         });
@@ -27390,8 +27384,6 @@ var Posts = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-
-      console.warn("ecco i posts", this.state.posts);
 
       return _react2.default.createElement(
         'div',
@@ -27503,7 +27495,6 @@ var Header = function (_Component) {
       (0, _axios.get)(ENDPOINT).then(function (_ref) {
         var data = _ref.data;
 
-        console.log('cat', data);
         _this2.setState({
           categories: data
         });

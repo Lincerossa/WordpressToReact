@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import { get } from 'axios'
+import { get, all, spread } from 'axios'
 
 import { Posts, Header } from './components'
 
@@ -20,30 +20,44 @@ class Content extends Component {
 
   fetchData(){
 
-    const slug = window.location.pathname.slice(1)
+    const api = type => `http://192.168.33.10/wordpress/wp-json/wp/v2/${type}`
 
-    const endPoint = taxonomy => `http://192.168.33.10/wordpress/wp-json/wp/v2/${taxonomy}?slug=${slug}`
+    const getPosts = () => get(api('posts'))
+    const getPages = () => get(api('pages'))
+    const getCategories = () => get(api('categories'))
 
-    const posts = endPoint('posts')
-    const pages = endPoint('pages')
-    const categories = endPoint('categories')
+    all([ getPosts(), getPages(), getCategories() ])
 
-    [ posts, pages, categories ].map( (i, index) => {
+      .then(spread( (posts, pages, categories) => {
 
-      get(checktaxonomy[index])
-        .then( ({ data }) => {
-          if(data.length){
-            console.log("OKOKOKOK",data[0].taxonomy)
-            this.setState({
-              taxonomy: data[0].taxonomy
-            })
+        const routes = slug => ({ slug: slug })
+
+        const postRoutes = posts.data.map( ({slug}) => {
+          return{
+            slug: slug
           }
         })
-        .catch( (error) =>{
-          console.log(error);
-        });     
 
-    })
+        const pageRoutes = pages.data.map( ({slug}) => {
+          return{
+            slug: slug
+          }
+        })
+
+        const categoryRoutes = categories.data.map( ({slug}) => {
+          return{
+            slug: slug
+          }
+        })
+
+
+        console.log('posts--->',postRoutes)
+        console.log('categories--->',categoryRoutes)
+        console.log('pages--->',pageRoutes)
+
+      }))
+
+
 
   }
 
@@ -83,7 +97,6 @@ const Layer = () =>
     <Header />
     <Content />
   </div>
-
 
 ReactDOM.render((
   <BrowserRouter>

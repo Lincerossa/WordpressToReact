@@ -25,7 +25,6 @@ class Header extends Component {
 
     get(ENDPOINT)
       .then( ({ data }) => {
-      	console.log('cat',data)
         this.setState({
           categories: data
         })
