@@ -15,8 +15,7 @@ routes()
 
       const context = {}
 
-      const html = ReactDOMServer.renderToString(
-        <StaticRouter location={req.url} context={context}>
+      const html = ReactDOMServer.renderToString(<StaticRouter location={req.url} context={context}>
           <Root/>
         </StaticRouter>
       )
