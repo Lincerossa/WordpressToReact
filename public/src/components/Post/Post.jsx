@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import { get } from 'axios'
 
-import style from './Posts.scss'
+import style from './Post.scss'
 
-class Posts extends Component {
+class Post extends Component {
 
 
   constructor(props){
@@ -55,4 +55,4 @@ class Posts extends Component {
   }
 
 
-export default Posts
+export default Post

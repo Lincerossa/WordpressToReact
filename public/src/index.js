@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import { get, all, spread } from 'axios'
 
-import { Posts, Header } from './components'
+import { Post, Page, Category, Header } from './components'
 
 class Content extends Component {
 
@@ -53,15 +53,15 @@ class Content extends Component {
     	<Switch> 
         {
           postRoutes && postRoutes.length &&
-          postRoutes.map( post => <Route exact path={post.slug} component={Posts}/> )
+          postRoutes.map( post => <Route exact path={post.slug} component={Post}/> )
         }
         {
           pageRoutes && pageRoutes.length &&
-          pageRoutes.map( page => <Route exact path={page.slug} component={Posts}/> )
+          pageRoutes.map( page => <Route exact path={page.slug} component={Page}/> )
         }
         {
           categoryRoutes && categoryRoutes.length &&
-          categoryRoutes.map( category => <Route exact path={category.slug} component={Posts}/> )
+          categoryRoutes.map( category => <Route exact path={category.slug} component={Category}/> )
         }
       </Switch>
     )
