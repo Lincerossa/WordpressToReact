@@ -7,7 +7,7 @@ const Category = (props) => {
 
   return(
     <div className={category}>
-      <p>Qui metto lista di categories</p>
+      <p>Qui metto singola categoria</p>
     </div>
   )
 }
