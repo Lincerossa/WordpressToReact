@@ -26313,6 +26313,40 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var routes = function routes() {
+
+  var api = function api(type) {
+    return 'http://192.168.33.10/wordpress/wp-json/wp/v2/' + type;
+  };
+
+  var getPosts = function getPosts() {
+    return (0, _axios.get)(api('posts'));
+  };
+  var getPages = function getPages() {
+    return (0, _axios.get)(api('pages'));
+  };
+  var getCategories = function getCategories() {
+    return (0, _axios.get)(api('categories'));
+  };
+
+  return (0, _axios.all)([getPosts(), getPages(), getCategories()]).then((0, _axios.spread)(function (posts, pages, categories) {
+    return {
+      posts: posts.data.map(function (_ref) {
+        var slug = _ref.slug;
+        return { slug: '/' + slug };
+      }),
+      pages: pages.data.map(function (_ref2) {
+        var slug = _ref2.slug;
+        return { slug: '/' + slug };
+      }),
+      categories: categories.data.map(function (_ref3) {
+        var slug = _ref3.slug;
+        return { slug: '/' + slug };
+      })
+    };
+  }));
+};
+
 var Root = function (_Component) {
   _inherits(Root, _Component);
 
@@ -26326,58 +26360,34 @@ var Root = function (_Component) {
   }
 
   _createClass(Root, [{
-    key: 'fetchData',
-    value: function fetchData() {
+    key: 'getRoutes',
+    value: function getRoutes() {
       var _this2 = this;
 
-      var api = function api(type) {
-        return 'http://192.168.33.10/wordpress/wp-json/wp/v2/' + type;
-      };
-
-      var getPosts = function getPosts() {
-        return (0, _axios.get)(api('posts'));
-      };
-      var getPages = function getPages() {
-        return (0, _axios.get)(api('pages'));
-      };
-      var getCategories = function getCategories() {
-        return (0, _axios.get)(api('categories'));
-      };
-
-      (0, _axios.all)([getPosts(), getPages(), getCategories()]).then((0, _axios.spread)(function (posts, pages, categories) {
-
-        var postRoutes = posts.data.map(function (_ref) {
-          var slug = _ref.slug;
-          return { slug: '/' + slug };
-        });
-        var pageRoutes = pages.data.map(function (_ref2) {
-          var slug = _ref2.slug;
-          return { slug: '/' + slug };
-        });
-        var categoryRoutes = categories.data.map(function (_ref3) {
-          var slug = _ref3.slug;
-          return { slug: '/' + slug };
-        });
+      routes().then(function (_ref4) {
+        var posts = _ref4.posts,
+            pages = _ref4.pages,
+            categories = _ref4.categories;
 
         _this2.setState({
-          postRoutes: postRoutes,
-          pageRoutes: pageRoutes,
-          categoryRoutes: categoryRoutes
+          posts: posts,
+          pages: pages,
+          categories: categories
         });
-      }));
+      });
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.fetchData();
+      this.getRoutes();
     }
   }, {
     key: 'render',
     value: function render() {
       var _state = this.state,
-          postRoutes = _state.postRoutes,
-          pageRoutes = _state.pageRoutes,
-          categoryRoutes = _state.categoryRoutes;
+          posts = _state.posts,
+          pages = _state.pages,
+          categories = _state.categories;
 
       return _react2.default.createElement(
         'div',
@@ -26386,13 +26396,13 @@ var Root = function (_Component) {
         _react2.default.createElement(
           _reactRouterDom.Switch,
           null,
-          postRoutes && postRoutes.length && postRoutes.map(function (post) {
+          posts && posts.length && posts.map(function (post) {
             return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: post.slug, component: _components.Post });
           }),
-          pageRoutes && pageRoutes.length && pageRoutes.map(function (page) {
+          pages && pages.length && pages.map(function (page) {
             return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: page.slug, component: _components.Page });
           }),
-          categoryRoutes && categoryRoutes.length && categoryRoutes.map(function (category) {
+          categories && categories.length && categories.map(function (category) {
             return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: category.slug, component: _components.Category });
           })
         )
