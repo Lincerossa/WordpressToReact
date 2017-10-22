@@ -1,59 +1,22 @@
-import React, {Component} from 'react'
-import { get } from 'axios'
+import React from 'react'
 
 import style from './Post.scss'
 
-class Post extends Component {
+const Post = ({ posts }) => {
 
-
-  constructor(props){
-
-    super(props)
-
-    this.state = {
-      posts: []
-    }
-
-  }
-
-
-  fetchData(){
-
-    const ENDPOINT = 'http://192.168.33.10/wordpress/wp-json/wp/v2/posts'
-
-    get(ENDPOINT)
-      .then( ({ data }) => {
-        this.setState({
-          posts: data
-        })
+  return(
+    <div> 
+    {
+      posts &&
+      posts.map( (post, key) => {
+        return <div key={key} className={style.post}>{post.rendered}</div>
       })
-      .catch( (error) =>{
-        console.log(error);
-      });
+      
+    }
+    </div>
+  )
 
-  }
-
-  componentDidMount(){
-    this.fetchData()
-  }
-
-  render(){
-    console.log("siii--->", this.props.posts)
-    return(
-      <div> 
-
-      {
-        this.state.posts &&
-        this.state.posts.map( post => {
-
-          return <div className={style.post}>titolo post </div>
-        })
-        
-      }
-      </div>
-    )}
-
-  }
+}
 
 
 export default Post

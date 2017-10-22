@@ -51,7 +51,7 @@ class Root extends Component {
 
     return(
       <div className="Root" id="root">
-        <Header />
+        <Header categories={categories} />
         <div> ecco che funziahh</div>
       	<Switch> 
           {
