@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "babel server.js | node",
-    "build": "webpack"
+    "client": "webpack",
+    "server": "BABEL_ENV=server babel-node src/server/server.js"
   },
   "author": "",
   "license": "ISC",
