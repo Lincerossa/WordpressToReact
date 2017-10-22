@@ -15,8 +15,7 @@ routes()
   .then( ({ posts, pages, categories }) => {
 
     createServer((req, res) => {
-
-
+      
       const parsedUrl = url.parse(req.url)
       const pathname = `.${parsedUrl.pathname}`
       const pathExt = path.parse(pathname).ext

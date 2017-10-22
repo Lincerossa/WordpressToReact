@@ -38,14 +38,15 @@ class Post extends Component {
   }
 
   render(){
-
+    console.log("siii--->", this.props.posts)
     return(
       <div> 
+
       {
         this.state.posts &&
         this.state.posts.map( post => {
 
-          return <div className={style.post}> { post.title.rendered} </div>
+          return <div className={style.post}>titolo post </div>
         })
         
       }

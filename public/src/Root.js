@@ -40,7 +40,14 @@ class Root extends Component {
       categories = this.state.categories
     }
 
-    console.warn(posts)
+    const PostWithApi = props => {
+      return(
+        <Post
+          {...props}
+          posts={posts}
+        />
+      )
+    }
 
     return(
       <div className="Root" id="root">
@@ -49,7 +56,7 @@ class Root extends Component {
       	<Switch> 
           {
             posts && posts.length &&
-            posts.map( (post,key) => <Route key={key} exact path={post.slug} component={Post}/> )
+            posts.map( (post,key) => <Route key={key} exact path={post.slug} component={PostWithApi}/> )
           }
           {
             pages && pages.length &&
