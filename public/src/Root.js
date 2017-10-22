@@ -35,13 +35,15 @@ class Root extends Component {
     let { posts, pages, categories } = this.props
 
     if(posts === undefined || pages === undefined || categories === undefined){
-      posts = this.state
-      pages = this.state
-      categories = this.state
+      posts = this.state.posts
+      pages = this.state.pages
+      categories = this.state.categories
     }
 
+    console.warn(posts)
+
     return(
-      <div className="Root">
+      <div className="Root" id="root">
         <Header />
         <div> ecco che funziahh</div>
       	<Switch> 

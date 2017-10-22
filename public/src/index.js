@@ -2,9 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import Root from './Root'
+const run = () => {
+    ReactDOM.render((
+      <BrowserRouter>
+        <Root />
+      </BrowserRouter>
+    ), document.getElementById('root'))
+}
 
-ReactDOM.render((
-  <BrowserRouter>
-    <Root />
-  </BrowserRouter>
-), document.getElementById('root'))
+window.addEventListener('DOMContentLoaded', run(), false)

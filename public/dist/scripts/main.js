@@ -3081,11 +3081,15 @@ var _Root2 = _interopRequireDefault(_Root);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(
-  _reactRouterDom.BrowserRouter,
-  null,
-  _react2.default.createElement(_Root2.default, null)
-), document.getElementById('root'));
+var run = function run() {
+  _reactDom2.default.render(_react2.default.createElement(
+    _reactRouterDom.BrowserRouter,
+    null,
+    _react2.default.createElement(_Root2.default, null)
+  ), document.getElementById('root'));
+};
+
+window.addEventListener('DOMContentLoaded', run(), false);
 
 /***/ }),
 /* 44 */
@@ -26366,14 +26370,16 @@ var Root = function (_Component) {
 
 
       if (posts === undefined || pages === undefined || categories === undefined) {
-        posts = this.state;
-        pages = this.state;
-        categories = this.state;
+        posts = this.state.posts;
+        pages = this.state.pages;
+        categories = this.state.categories;
       }
+
+      console.warn(posts);
 
       return _react2.default.createElement(
         'div',
-        { className: 'Root' },
+        { className: 'Root', id: 'root' },
         _react2.default.createElement(_components.Header, null),
         _react2.default.createElement(
           'div',

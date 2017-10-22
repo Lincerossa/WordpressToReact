@@ -1,43 +1,54 @@
-import express, { router } from 'express'
 import { createServer } from 'http'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 
+import path from 'path'
+import fs from 'fs'
+import url from 'url'
+
 import routes from './routes'
 import Root from '../Root'
-const app = express()
 
 routes()
+
   .then( ({ posts, pages, categories }) => {
 
     createServer((req, res) => {
 
-      const context = {}
 
-      const html = ReactDOMServer.renderToString(<html>
-        <head>
-         <meta charSet="UTF-8" />
-         <title>Wordpress To React</title>
-         <link rel="stylesheet" href="/dist/scripts/style.css" />
-        </head>
-        <body>
-        <StaticRouter location={req.url} context={context}>
-          <Root posts={posts} pages={pages} categories={categories} />
-        </StaticRouter>
-        <script src="/dist/scripts/main.js"></script>
-        </body>
-        </html>
-      )
+      const parsedUrl = url.parse(req.url)
+      const pathname = `.${parsedUrl.pathname}`
+      const pathExt = path.parse(pathname).ext
 
-      // context.url will contain the URL to redirect to if a <Redirect> was used
-      if (context.url) {
-        res.writeHead(302, {
-          Location: context.url
+      const mymeType = {
+        '.js' : 'text/javascript',
+        '.js.map' : 'text/javascript',
+        '.css' : 'text/css',
+        '.css.map' : 'text/css',
+      }
+
+      if(mymeType[pathExt] !== undefined){
+        fs.readFile (pathname, (err,data) =>{
+          res.writeHead(200, {"Content-Type": mymeType[pathExt]})
+          res.end(data)
         })
-        res.end()
       } else {
-        res.write(html)
+        res.writeHead(200, {"Content-Type":"text/html"})
+        res.write("<!DOCTYPE html>")
+        res.write("<head>")
+        res.write("<title>Wordpress To React Server</title>")
+        res.write("<link rel='stylesheet' href='/dist/scripts/style.css' />")
+        res.write("</head>")
+        res.write("<body>")
+        res.write(ReactDOMServer.renderToString(
+          <StaticRouter location={req.url} context={{}}>
+            <Root posts={posts} pages={pages} categories={categories} />
+          </StaticRouter>
+        ))
+        res.write("<script src='/dist/scripts/main.js' async type='text/javascript'></script>")
+        res.write("</body>")
+        res.write("</html>")
         res.end()
       }
     }).listen(3000)
