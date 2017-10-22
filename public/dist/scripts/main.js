@@ -26347,31 +26347,50 @@ var Root = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.getRoutes();
+      var _props = this.props,
+          posts = _props.posts,
+          pages = _props.pages,
+          categories = _props.categories;
+
+      if (posts === undefined || pages === undefined || categories === undefined) {
+        this.getRoutes();
+      }
     }
   }, {
     key: 'render',
-    value: function render() {
-      var _state = this.state,
-          posts = _state.posts,
-          pages = _state.pages,
-          categories = _state.categories;
+    value: function render(props) {
+      var _props2 = this.props,
+          posts = _props2.posts,
+          pages = _props2.pages,
+          categories = _props2.categories;
+
+
+      if (posts === undefined || pages === undefined || categories === undefined) {
+        posts = this.state;
+        pages = this.state;
+        categories = this.state;
+      }
 
       return _react2.default.createElement(
         'div',
         { className: 'Root' },
         _react2.default.createElement(_components.Header, null),
         _react2.default.createElement(
+          'div',
+          null,
+          ' ecco che funziahh'
+        ),
+        _react2.default.createElement(
           _reactRouterDom.Switch,
           null,
-          posts && posts.length && posts.map(function (post) {
-            return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: post.slug, component: _components.Post });
+          posts && posts.length && posts.map(function (post, key) {
+            return _react2.default.createElement(_reactRouterDom.Route, { key: key, exact: true, path: post.slug, component: _components.Post });
           }),
-          pages && pages.length && pages.map(function (page) {
-            return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: page.slug, component: _components.Page });
+          pages && pages.length && pages.map(function (page, key) {
+            return _react2.default.createElement(_reactRouterDom.Route, { key: key, exact: true, path: page.slug, component: _components.Page });
           }),
-          categories && categories.length && categories.map(function (category) {
-            return _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: category.slug, component: _components.Category });
+          categories && categories.length && categories.map(function (category, key) {
+            return _react2.default.createElement(_reactRouterDom.Route, { key: key, exact: true, path: category.slug, component: _components.Category });
           }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _components.Page })
         )
@@ -27697,7 +27716,7 @@ var Header = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: _Header2.default.HeaderLogo },
-            'qui va logo'
+            'qui va logooo'
           )
         ),
         _react2.default.createElement(

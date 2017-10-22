@@ -42,7 +42,7 @@ class Header extends Component {
 	render(){
 		return(
 		  <div className={style.Header}>
-		  	<Link to='/'><div className={style.HeaderLogo}>qui va logo</div></Link>
+		  	<Link to='/'><div className={style.HeaderLogo}>qui va logooo</div></Link>
         <div className={style.HeaderHamburger}>
   		  	{
   		  		this.state.categories &&

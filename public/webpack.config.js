@@ -13,7 +13,6 @@ module.exports = {
     loaders: [
       {
         test: /\.(js||jsx)$/,
-        babelrc: false,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         options: {

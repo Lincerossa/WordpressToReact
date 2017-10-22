@@ -15,9 +15,19 @@ routes()
 
       const context = {}
 
-      const html = ReactDOMServer.renderToString(<StaticRouter location={req.url} context={context}>
-          <Root/>
+      const html = ReactDOMServer.renderToString(<html>
+        <head>
+         <meta charSet="UTF-8" />
+         <title>Wordpress To React</title>
+         <link rel="stylesheet" href="/dist/scripts/style.css" />
+        </head>
+        <body>
+        <StaticRouter location={req.url} context={context}>
+          <Root posts={posts} pages={pages} categories={categories} />
         </StaticRouter>
+        <script src="/dist/scripts/main.js"></script>
+        </body>
+        </html>
       )
 
       // context.url will contain the URL to redirect to if a <Redirect> was used

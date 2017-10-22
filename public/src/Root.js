@@ -23,26 +23,39 @@ class Root extends Component {
   }
 
   componentDidMount(){
-    this.getRoutes()
+
+    const { posts, pages, categories } = this.props
+    if(posts === undefined || pages === undefined || categories === undefined){
+      this.getRoutes()
+    }    
   }
 
-  render(){
-    const { posts, pages, categories } = this.state
+  render(props){
+
+    let { posts, pages, categories } = this.props
+
+    if(posts === undefined || pages === undefined || categories === undefined){
+      posts = this.state
+      pages = this.state
+      categories = this.state
+    }
+
     return(
       <div className="Root">
         <Header />
+        <div> ecco che funziahh</div>
       	<Switch> 
           {
             posts && posts.length &&
-            posts.map( post => <Route exact path={post.slug} component={Post}/> )
+            posts.map( (post,key) => <Route key={key} exact path={post.slug} component={Post}/> )
           }
           {
             pages && pages.length &&
-            pages.map( page => <Route exact path={page.slug} component={Page}/> )
+            pages.map( (page,key) => <Route key={key} exact path={page.slug} component={Page}/> )
           }
           {
             categories && categories.length &&
-            categories.map( category => <Route exact path={category.slug} component={Category}/> )
+            categories.map( (category,key) => <Route key={key} exact path={category.slug} component={Category}/> )
           }
           <Route exact path='/' component={Page}/> 
         </Switch>
