@@ -8,8 +8,11 @@ const Post = ({ posts }) => {
     <div> 
     {
       posts &&
-      posts.map( (post, key) => {
-        return <div key={key} className={style.post}>{post.rendered}</div>
+      posts.map( (post, index) => {
+        return <div key={'post-' + index} className={style.post}>
+
+ciao
+        </div>
       })
       
     }

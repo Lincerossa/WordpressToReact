@@ -24,21 +24,16 @@ class Root extends Component {
 
   componentDidMount(){
 
-    const { posts, pages, categories } = this.props
-    if(posts === undefined || pages === undefined || categories === undefined){
+    if(this.props.posts === undefined || this.props.pages === undefined || this.props.categories === undefined){
       this.getRoutes()
     }    
   }
 
   render(props){
 
-    let { posts, pages, categories } = this.props
-
-    if(posts === undefined || pages === undefined || categories === undefined){
-      posts = this.state.posts
-      pages = this.state.pages
-      categories = this.state.categories
-    }
+    const posts = this.props.posts || this.state.posts || ''
+    const pages = this.props.pages || this.state.pages || ''
+    const categories = this.props.categories || this.state.categories || ''
 
     const PostWithApi = props => {
       return(
