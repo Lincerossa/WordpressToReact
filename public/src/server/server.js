@@ -1,55 +1,56 @@
-import { createServer } from 'http'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
+import express from 'express'
+import { get } from 'axios'
 
-import path from 'path'
-import fs from 'fs'
-import url from 'url'
-
-import routes from './routes'
 import Root from '../Root'
+// import { posts, pages, categories } from '../api'
 
-routes()
+const app = express()
 
-  .then( ({ posts, pages, categories }) => {
+  const header = `<!DOCTYPE html>
+                  <html>
+                    <head>
+                    <title>Wordpress To React Server</title>
+                    <link rel='stylesheet' href='/dist/scripts/style.css' />
+                    </head>
+                    <body>`
 
-    createServer((req, res) => {
-      
-      const parsedUrl = url.parse(req.url)
-      const pathname = `.${parsedUrl.pathname}`
-      const pathExt = path.parse(pathname).ext
+  const content = (req, type, data) => ReactDOMServer.renderToString(
+                    <StaticRouter location={req.url} context={{}}>
+                      <Root type={type} data={data}/>
+                    </StaticRouter>
+                  )
 
-      const mymeType = {
-        '.js' : 'text/javascript',
-        '.js.map' : 'text/javascript',
-        '.css' : 'text/css',
-        '.css.map' : 'text/css',
-      }
+  const footer = `<script src='/dist/scripts/main.js' async type='text/javascript'></script>
+                  </body>
+                </html>`
 
-      if(mymeType[pathExt] !== undefined){
-        fs.readFile (pathname, (err,data) =>{
-          res.writeHead(200, {"Content-Type": mymeType[pathExt]})
-          res.end(data)
-        })
-      } else {
-        res.writeHead(200, {"Content-Type":"text/html"})
-        res.write("<!DOCTYPE html>")
-        res.write("<head>")
-        res.write("<title>Wordpress To React Server</title>")
-        res.write("<link rel='stylesheet' href='/dist/scripts/style.css' />")
-        res.write("</head>")
-        res.write("<body>")
-        res.write(ReactDOMServer.renderToString(
-          <StaticRouter location={req.url} context={{}}>
-            <Root posts={posts} pages={pages} categories={categories} />
-          </StaticRouter>
-        ))
-        res.write("<script src='/dist/scripts/main.js' async type='text/javascript'></script>")
-        res.write("</body>")
-        res.write("</html>")
-        res.end()
-      }
-    }).listen(3000)
 
-  })
+  app.get('/posts', async (req, res) => {
+    const CC = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/posts')
+    res.set('Content-Type', 'text/html')
+    res.send(header+content(req, 'posts', CC)+footer);
+  });
+
+
+  app.get('/post/:slug', async (req, res) => {
+    const CCC = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/posts?slug=:slug')
+    res.set('Content-Type', 'text/html')
+    res.send(header+content(req, 'post', CCC)+footer);
+  });
+
+  app.get('/categories/', function (req, res) {
+    res.set('Content-Type', 'text/html')
+    res.send(header+content(req, 'categories')+footer);
+  });
+
+  app.get('/category/:slug', function (req, res) {
+    res.set('Content-Type', 'text/html')
+    res.send(header+content(req, 'category')+footer);
+  });
+
+  app.listen(3000, function () {
+    console.log('Example app listening on port 3000!');
+  });

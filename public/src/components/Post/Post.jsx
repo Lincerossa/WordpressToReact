@@ -2,20 +2,12 @@ import React from 'react'
 
 import style from './Post.scss'
 
-const Post = ({ posts }) => {
-
+const Post = ({data, type}) => {
+  console.log('postData---->',data)
+  console.log('postType---->',type)
   return(
     <div> 
-    {
-      posts &&
-      posts.map( (post, index) => {
-        return <div key={'post-' + index} className={style.post}>
-
-ciao
-        </div>
-      })
-      
-    }
+    singolo post
     </div>
   )
 
