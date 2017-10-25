@@ -1,7 +1,5 @@
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
@@ -44,8 +42,8 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin("./dist/scripts/style.css"),
-    new BundleAnalyzerPlugin({
-      analyzerHost: 'localhost',
-    })
+    // new BundleAnalyzerPlugin({
+    //   analyzerHost: 'localhost',
+    // })
   ]
 }

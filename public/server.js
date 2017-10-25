@@ -19,11 +19,11 @@ const page = (content, propsToRehydrate ) => `
     <html>
       <head>
       <title>Wordpress To React Server</title>
-      <link rel='stylesheet' href='/dist/scripts/style.css' />
+      <link rel='stylesheet' href='/style.css' />
       </head>
       <body>
       ${content}
-      <script src='/dist/scripts/main.js' async type='text/javascript'></script>
+      <script src='/main.js' async type='text/javascript'></script>
       <script async type='text/javascript'>
         var TT = ${JSON.stringify(propsToRehydrate.data)}
       </script>
@@ -33,7 +33,10 @@ const page = (content, propsToRehydrate ) => `
 const api = 'http://dev.wordpresstoreact.it/wordpress/wp-json/wp/v2/'
 
 const app = express()
-app.use(express.static('dist'))
+
+
+app.use(express.static(__dirname + '/dist/scripts'));
+
 app.get('/', async (req, res) => {
   const data = await get(api+'posts')
   res.send( page(content(req, 'homePage', data), data ))
