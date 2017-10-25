@@ -25629,28 +25629,18 @@ var Root = function Root(_ref) {
 
 
   var MyPosts = function MyPosts(props) {
-    return _react2.default.createElement(_.Posts, _extends({
-      posts: data
-    }, props));
+    return _react2.default.createElement(_.Posts, _extends({ posts: data }, props));
   };
-
   var MyPost = function MyPost(props) {
-    return _react2.default.createElement(_.Post, _extends({
-      post: data
-    }, props));
+    return _react2.default.createElement(_.Post, _extends({ post: data }, props));
   };
-
   var MyCategory = function MyCategory(props) {
-    return _react2.default.createElement(_.Category, _extends({
-      category: data
-    }, props));
+    return _react2.default.createElement(_.Category, _extends({ category: data }, props));
+  };
+  var MyCategories = function MyCategories(props) {
+    return _react2.default.createElement(_.Categories, _extends({ categories: data }, props));
   };
 
-  var MyCategories = function MyCategories(props) {
-    return _react2.default.createElement(_.Categories, _extends({
-      categories: data
-    }, props));
-  };
   return _react2.default.createElement(
     'div',
     { className: 'Root', id: 'root' },
