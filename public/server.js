@@ -3,18 +3,10 @@ import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 import express from 'express'
 import { get } from 'axios'
-import path from 'path'
+import api from './src/api'
 import Root from './src/Root.js'
 
-const content = (req, type, data) => {
-  return ReactDOMServer.renderToString(
-    <StaticRouter location={req.url} context={{}}>
-      <Root type={type} data={data}/>
-    </StaticRouter>
-  )
-}
-
-const page = (content, propsToRehydrate ) => `
+const page = (req, data, propsToRehydrate ) => `
   <!DOCTYPE html>
     <html>
       <head>
@@ -22,7 +14,11 @@ const page = (content, propsToRehydrate ) => `
       <link rel='stylesheet' href='/style.css' />
       </head>
       <body>
-      ${content}
+      ${ReactDOMServer.renderToString(
+        <StaticRouter location={req.url} context={{}}>
+          <Root data={data}/>
+        </StaticRouter>
+      )}
       <script src='/main.js' async type='text/javascript'></script>
       <script async type='text/javascript'>
         var TT = ${JSON.stringify(propsToRehydrate.data)}
@@ -30,40 +26,33 @@ const page = (content, propsToRehydrate ) => `
     </body>
   </html>
 `
-const api = 'http://dev.wordpresstoreact.it/wordpress/wp-json/wp/v2/'
-
 const app = express()
-
 
 app.use(express.static(__dirname + '/dist/scripts'));
 
 app.get('/', async (req, res) => {
-  const data = await get(api+'posts')
-  res.send( page(content(req, 'homePage', data), data ))
+  const data = await get(api.getPosts)
+  res.send( page(req, data, data ))
 })
 
-//posts generali
 app.get('/posts', async (req, res) => {
-  const data = await get(api+'posts')
-  res.send( page(content(req, 'posts', data), data ))
+  const data = await get(api.getPosts)
+  res.send( page(req, data, data ))
 })
 
-//post singolo
 app.get('/post/:slug', async (req, res) => {
-  const data = await get(api+'posts')
-  res.send( page(content(req, 'post', data),data ))
+  const data = await get(api.getPosts)
+  res.send( page(req, data, data ))
 })
 
-//categories
 app.get('/categories', async (req, res) => {
-  const data = await get(api+'categories')
-  res.send( page(content(req, 'categories', data),data ))
+  const data = await get(api.getCategories)
+  res.send( page(req, data, data ))
 })
 
-//categories
 app.get('/category/:slug', async (req, res) => {
-  const data = await get(api+'categories')
-  res.send( page(content(req, 'category', data),data ))
+  const data = await get(api.getCategories)
+  res.send( page(req, data, data ))
 })
 
 app.listen(3000, function () {

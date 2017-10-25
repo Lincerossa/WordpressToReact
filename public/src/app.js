@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import Root from './Root'
-const run = () => {
+
+const run = (TT) => {
     ReactDOM.render((
       <BrowserRouter>
         <Root data={TT}/>

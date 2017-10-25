@@ -45,7 +45,6 @@ const Root = ({ data, type, categories }) => {
         />
       )
     }
-
     return(
       <div className="Root" id="root">
         <Header />

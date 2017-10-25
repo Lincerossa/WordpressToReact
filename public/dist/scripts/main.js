@@ -2396,7 +2396,7 @@ var _Root2 = _interopRequireDefault(_Root);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var run = function run() {
+var run = function run(TT) {
   _reactDom2.default.render(_react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
@@ -25660,7 +25660,6 @@ var Root = function Root(_ref) {
       type: type
     }, props));
   };
-
   return _react2.default.createElement(
     'div',
     { className: 'Root', id: 'root' },
