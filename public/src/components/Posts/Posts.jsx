@@ -1,13 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'     
 
 import style from './Posts.scss'
 
-const Posts = ({ posts, type }) => {
-  console.log('postsData---->',posts)
-  console.log('postsType---->',type)
+const Posts = ({ posts }) => {
   return(
     <div> 
-    tutti i posts
+    tutti i posts:
+    
     </div>
   )
 

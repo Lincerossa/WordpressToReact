@@ -2337,7 +2337,7 @@ var _Root2 = _interopRequireDefault(_Root);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var run = function run(PROPS) {
+var renderApp = function renderApp(PROPS) {
   _reactDom2.default.render(_react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
@@ -2345,7 +2345,7 @@ var run = function run(PROPS) {
   ), document.getElementById('root'));
 };
 
-window.addEventListener('DOMContentLoaded', run(PROPS), false);
+window.addEventListener('DOMContentLoaded', renderApp(PROPS), false);
 
 /***/ }),
 /* 35 */
@@ -25821,6 +25821,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(50);
+
 var _Posts = __webpack_require__(84);
 
 var _Posts2 = _interopRequireDefault(_Posts);
@@ -25828,15 +25830,12 @@ var _Posts2 = _interopRequireDefault(_Posts);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Posts = function Posts(_ref) {
-  var posts = _ref.posts,
-      type = _ref.type;
+  var posts = _ref.posts;
 
-  console.log('postsData---->', posts);
-  console.log('postsType---->', type);
   return _react2.default.createElement(
     'div',
     null,
-    'tutti i posts'
+    'tutti i posts:'
   );
 };
 
@@ -25893,12 +25892,17 @@ var Category = function Category(_ref) {
   var category = _ref.category,
       type = _ref.type;
 
-  console.log('CategoryData---->', category);
-  console.log('CategoryType---->', type);
   return _react2.default.createElement(
     'div',
     null,
-    'singolo Category'
+    'singolo Category.',
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      {
+        to: '/categories'
+      },
+      'vai alle categorie'
+    )
   );
 };
 
@@ -25951,20 +25955,29 @@ var _Categories = __webpack_require__(90);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Categories = function Categories(_ref) {
-  var categories = _ref.categories,
-      type = _ref.type;
+  var categories = _ref.categories;
 
-  console.log('CategoriesData---->', categories);
-  console.log('CategoriesType---->', type);
+
+  var cat = categories.data || categories;
+
   return _react2.default.createElement(
     'div',
     null,
-    'tutte le categories',
-    _react2.default.createElement(
-      _reactRouterDom.Link,
-      { to: '/category/first-category' },
-      'vado ad una categoria'
-    )
+    'tutte le categories:',
+    cat && cat.length > 0 && cat.map(function (category, key) {
+      return _react2.default.createElement(
+        'p',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          {
+            key: key,
+            to: '/category/' + category.slug
+          },
+          category.name
+        )
+      );
+    })
   );
 };
 

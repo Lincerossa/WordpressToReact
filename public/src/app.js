@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import Root from './components/Root.js'
 
-const run = PROPS => {
+const renderApp = PROPS => {
     ReactDOM.render((
       <BrowserRouter>
         <Root data={PROPS}/>
@@ -11,4 +11,4 @@ const run = PROPS => {
     ), document.getElementById('root'))
 }
 
-window.addEventListener('DOMContentLoaded', run(PROPS), false)
+window.addEventListener('DOMContentLoaded', renderApp(PROPS), false)

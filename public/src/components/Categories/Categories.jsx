@@ -3,13 +3,22 @@ import { Link } from 'react-router-dom'
 
 import { categories } from './Categories.scss'
 
-const Categories = ({ categories, type }) => {
-  console.log('CategoriesData---->',categories)
-  console.log('CategoriesType---->',type)
+const Categories = ({ categories }) => {
+
+  const cat = categories.data || categories
+
   return(
     <div> 
-    tutte le categories
-    <Link to={`/category/first-category`}>vado ad una categoria</Link>
+    tutte le categories:
+    {
+      cat && cat.length > 0 &&
+      cat.map ( (category, key) => <p><Link 
+          key={key} 
+          to={`/category/${category.slug}`}
+        >{category.name}</Link></p>
+      )
+    }
+    
     </div>
   )
 }
