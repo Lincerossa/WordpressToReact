@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom'
 
 import { category } from './Category.scss'
 
-const Category = ({ category, type }) => {
+const Category = ({ category }) => {
   return(
     <div> 
-    singolo Category.
-    <Link 
-          to={`/categories`}
-        >vai alle categorie</Link>
+
+    <Link to={`/categories`}>vai alle categorie</Link>
+    <Link to={`/posts`}>vai ai posts</Link>
     </div>
   )
 }

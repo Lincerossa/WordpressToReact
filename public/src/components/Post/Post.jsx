@@ -2,7 +2,7 @@ import React from 'react'
 
 import style from './Post.scss'
 
-const Post = ({ post, type }) => {
+const Post = ({ post }) => {
   console.log('postData---->',post)
   return(
     <div> 

@@ -25767,8 +25767,7 @@ var _Post2 = _interopRequireDefault(_Post);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Post = function Post(_ref) {
-  var post = _ref.post,
-      type = _ref.type;
+  var post = _ref.post;
 
   console.log('postData---->', post);
   return _react2.default.createElement(
@@ -25832,10 +25831,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Posts = function Posts(_ref) {
   var posts = _ref.posts;
 
+
+  console.log(posts);
+
+  var POSTS = posts.data || posts;
+
   return _react2.default.createElement(
     'div',
     null,
-    'tutti i posts:'
+    'tutti i posts:',
+    POSTS && POSTS.length > 0 && POSTS.map(function (post, key) {
+      return _react2.default.createElement(
+        'p',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { key: key, to: '/post/' + post.slug },
+          post.title.rendered
+        )
+      );
+    })
   );
 };
 
@@ -25889,19 +25904,20 @@ var _Category = __webpack_require__(87);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Category = function Category(_ref) {
-  var category = _ref.category,
-      type = _ref.type;
+  var category = _ref.category;
 
   return _react2.default.createElement(
     'div',
     null,
-    'singolo Category.',
     _react2.default.createElement(
       _reactRouterDom.Link,
-      {
-        to: '/categories'
-      },
+      { to: '/categories' },
       'vai alle categorie'
+    ),
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { to: '/posts' },
+      'vai ai posts'
     )
   );
 };
