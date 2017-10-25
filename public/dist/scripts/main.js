@@ -25612,6 +25612,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+// import routes from './server/routes'
+
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -25623,38 +25628,63 @@ var _components = __webpack_require__(78);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Root = function Root(_ref) {
-  var _ref$data = _ref.data,
-      data = _ref$data === undefined ? '' : _ref$data;
+  var data = _ref.data,
+      type = _ref.type,
+      categories = _ref.categories;
 
+
+  var MyPosts = function MyPosts(props) {
+    return _react2.default.createElement(_components.Posts, _extends({
+      posts: data,
+      type: type
+    }, props));
+  };
+
+  var MyPost = function MyPost(props) {
+    return _react2.default.createElement(_components.Post, _extends({
+      post: data,
+      type: type
+    }, props));
+  };
+
+  var MyCategory = function MyCategory(props) {
+    return _react2.default.createElement(_components.Category, _extends({
+      category: data,
+      type: type
+    }, props));
+  };
+
+  var MyCategories = function MyCategories(props) {
+    return _react2.default.createElement(Categories, _extends({
+      categories: data,
+      type: type
+    }, props));
+  };
 
   return _react2.default.createElement(
     'div',
     { className: 'Root', id: 'root' },
-    _react2.default.createElement(_components.Header, { categories: categories }),
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: function component(props) {
-          return _react2.default.createElement(_components.Page, { data: props });
-        } }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/posts', component: function component(props) {
-          return _react2.default.createElement(_components.Post, { data: props });
-        } }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/post/', component: function component(props) {
-          return _react2.default.createElement(_components.Post, { data: props });
-        } }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/category', component: function component(props) {
-          return _react2.default.createElement(_components.Category, { data: props });
-        } }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/categories/', component: function component(props) {
-          return _react2.default.createElement(_components.Category, { data: props });
-        } })
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _components.Page }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/posts/', component: MyPosts }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/post/:slug', component: MyPost }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/category', component: MyCategory }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/categories/', component: MyCategories })
     )
   );
 };
 
-// import routes from './server/routes'
 exports.default = Root;
+
+
+var ciao = 'porco';
+var marcello = function marcello(ciao) {
+  return console.log(ciao);
+};
+
+marcello('ville');
 
 /***/ }),
 /* 78 */
@@ -25676,7 +25706,16 @@ Object.defineProperty(exports, 'Post', {
   }
 });
 
-var _Category = __webpack_require__(82);
+var _Posts = __webpack_require__(82);
+
+Object.defineProperty(exports, 'Posts', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Posts).default;
+  }
+});
+
+var _Category = __webpack_require__(85);
 
 Object.defineProperty(exports, 'Category', {
   enumerable: true,
@@ -25685,7 +25724,16 @@ Object.defineProperty(exports, 'Category', {
   }
 });
 
-var _Page = __webpack_require__(85);
+var _Categories = __webpack_require__(88);
+
+Object.defineProperty(exports, 'Categories', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Categories).default;
+  }
+});
+
+var _Page = __webpack_require__(91);
 
 Object.defineProperty(exports, 'Page', {
   enumerable: true,
@@ -25694,7 +25742,7 @@ Object.defineProperty(exports, 'Page', {
   }
 });
 
-var _Header = __webpack_require__(88);
+var _Header = __webpack_require__(94);
 
 Object.defineProperty(exports, 'Header', {
   enumerable: true,
@@ -25745,12 +25793,16 @@ var _Post2 = _interopRequireDefault(_Post);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Post = function Post(props) {
-  console.warn('sdfdfdsfsd', props);
+var Post = function Post(_ref) {
+  var post = _ref.post,
+      type = _ref.type;
+
+  console.log('postData---->', post);
+  console.log('postType---->', type);
   return _react2.default.createElement(
     'div',
     null,
-    'qui ci sar\xE0 singolo post'
+    'singolo post'
   );
 };
 
@@ -25774,13 +25826,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Category = __webpack_require__(83);
+var _Posts = __webpack_require__(83);
 
-var _Category2 = _interopRequireDefault(_Category);
+var _Posts2 = _interopRequireDefault(_Posts);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _Category2.default;
+exports.default = _Posts2.default;
 
 /***/ }),
 /* 83 */
@@ -25797,32 +25849,33 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(7);
+var _Posts = __webpack_require__(84);
 
-var _Category = __webpack_require__(84);
+var _Posts2 = _interopRequireDefault(_Posts);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Category = function Category(props) {
+var Posts = function Posts(_ref) {
+  var posts = _ref.posts,
+      type = _ref.type;
 
+  console.log('postsData---->', posts);
+  console.log('postsType---->', type);
   return _react2.default.createElement(
     'div',
-    { className: _Category.category },
-    _react2.default.createElement(
-      'p',
-      null,
-      'Qui metto singola categoria'
-    )
+    null,
+    'tutti i posts'
   );
 };
 
-exports.default = Category;
+exports.default = Posts;
 
 /***/ }),
 /* 84 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+module.exports = {"posts":"posts___2LXi3"};
 
 /***/ }),
 /* 85 */
@@ -25835,13 +25888,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Page = __webpack_require__(86);
+var _Category = __webpack_require__(86);
 
-var _Page2 = _interopRequireDefault(_Page);
+var _Category2 = _interopRequireDefault(_Category);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _Page2.default;
+exports.default = _Category2.default;
 
 /***/ }),
 /* 86 */
@@ -25860,24 +25913,24 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(7);
 
-var _Page = __webpack_require__(87);
+var _Category = __webpack_require__(87);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Page = function Page(props) {
+var Category = function Category(_ref) {
+  var category = _ref.category,
+      type = _ref.type;
 
+  console.log('CategoryData---->', category);
+  console.log('CategoryType---->', type);
   return _react2.default.createElement(
     'div',
-    { className: _Page.page },
-    _react2.default.createElement(
-      'p',
-      null,
-      'Qui metto pagina'
-    )
+    null,
+    'singolo Category'
   );
 };
 
-exports.default = Page;
+exports.default = Category;
 
 /***/ }),
 /* 87 */
@@ -25896,7 +25949,129 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Header = __webpack_require__(89);
+var _Categories = __webpack_require__(89);
+
+var _Categories2 = _interopRequireDefault(_Categories);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Categories2.default;
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(7);
+
+var _Categories = __webpack_require__(90);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Categories = function Categories(_ref) {
+  var categories = _ref.categories,
+      type = _ref.type;
+
+  console.log('CategoriesData---->', categories);
+  console.log('CategoriesType---->', type);
+  return _react2.default.createElement(
+    'div',
+    null,
+    'tutte le categories'
+  );
+};
+
+exports.default = Categories;
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Page = __webpack_require__(92);
+
+var _Page2 = _interopRequireDefault(_Page);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Page2.default;
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(7);
+
+var _Page = __webpack_require__(93);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Page = function Page(props) {
+
+  return _react2.default.createElement(
+    'div',
+    { className: _Page.page },
+    _react2.default.createElement(
+      'p',
+      null,
+      'Qui metto la home'
+    )
+  );
+};
+
+exports.default = Page;
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Header = __webpack_require__(95);
 
 var _Header2 = _interopRequireDefault(_Header);
 
@@ -25905,7 +26080,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _Header2.default;
 
 /***/ }),
-/* 89 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25921,11 +26096,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(7);
 
-var _Hamburger = __webpack_require__(90);
+var _Hamburger = __webpack_require__(96);
 
 var _Hamburger2 = _interopRequireDefault(_Hamburger);
 
-var _Header = __webpack_require__(96);
+var _Header = __webpack_require__(102);
 
 var _Header2 = _interopRequireDefault(_Header);
 
@@ -25957,7 +26132,7 @@ var Header = function Header(_ref) {
 exports.default = Header;
 
 /***/ }),
-/* 90 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25967,7 +26142,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Hamburger = __webpack_require__(91);
+var _Hamburger = __webpack_require__(97);
 
 var _Hamburger2 = _interopRequireDefault(_Hamburger);
 
@@ -25976,7 +26151,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _Hamburger2.default;
 
 /***/ }),
-/* 91 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25992,11 +26167,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Hamburger = __webpack_require__(92);
+var _Hamburger = __webpack_require__(98);
 
 var _Hamburger2 = _interopRequireDefault(_Hamburger);
 
-var _Menu = __webpack_require__(93);
+var _Menu = __webpack_require__(99);
 
 var _Menu2 = _interopRequireDefault(_Menu);
 
@@ -26060,14 +26235,14 @@ var Hamburger = function (_Component) {
 exports.default = Hamburger;
 
 /***/ }),
-/* 92 */
+/* 98 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 module.exports = {"HamburgerIcon":"HamburgerIcon___1uGkV","HamburgerMenu":"HamburgerMenu___111Xl"};
 
 /***/ }),
-/* 93 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26077,7 +26252,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Menu = __webpack_require__(94);
+var _Menu = __webpack_require__(100);
 
 var _Menu2 = _interopRequireDefault(_Menu);
 
@@ -26086,7 +26261,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _Menu2.default;
 
 /***/ }),
-/* 94 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26102,7 +26277,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(7);
 
-var _Menu = __webpack_require__(95);
+var _Menu = __webpack_require__(101);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26141,14 +26316,14 @@ var Menu = function Menu(_ref) {
 exports.default = Menu;
 
 /***/ }),
-/* 95 */
+/* 101 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 module.exports = {"menu":"menu___2w9pn","menuCategories":"menuCategories___2bC6D","menuCategory":"menuCategory___lAu-G","menuClose":"menuClose___1429h"};
 
 /***/ }),
-/* 96 */
+/* 102 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

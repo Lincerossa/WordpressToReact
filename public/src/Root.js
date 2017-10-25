@@ -2,22 +2,58 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 // import routes from './server/routes'
-import { Post, Page, Category, Header } from './components'
+import { Post, Posts, Page, Category, Header } from './components'
 
 const Root = ({ data, type, categories }) => {
 
+    const MyPosts = (props) => {
+      return (
+        <Posts 
+          posts={data}
+          type={type}
+          {...props}
+        />
+      )
+    }
+
+    const MyPost = (props) => {
+      return (
+        <Post
+          post={data}
+          type={type}
+          {...props}
+        />
+      )
+    }
+
+    const MyCategory= (props) => {
+      return (
+        <Category
+          category={data}
+          type={type}
+          {...props}
+        />
+      )
+    }
+
+    const MyCategories = (props) => {
+      return (
+        <Categories
+          categories={data}
+          type={type}
+          {...props}
+        />
+      )
+    }
+
     return(
       <div className="Root" id="root">
-        <Header categories={categories} />
       	<Switch> 
-          <Route exact path='/' component={ data => <Page data={data} /> } /> 
-
-          <Route exact path='/posts' component={ data => <Post data={data} type={type} /> }/>
-          <Route path='/post/' component={ data => <Post data={data} type={type} />}/>
-
-          <Route exact path='/category' component={ data => <Category data={data} />}/>
-          <Route path='/categories/' component={ data => <Category data={data} /> }/>  
-
+          <Route exact path='/' component={Page} /> 
+          <Route path='/posts/' component={MyPosts}/>
+          <Route path='/post/:slug' component={MyPost}/>
+          <Route path='/category' component={MyCategory}/>
+          <Route path='/categories/' component={MyCategories}/>  
         </Switch>
       </div>
     )
@@ -25,3 +61,9 @@ const Root = ({ data, type, categories }) => {
 }
 
 export default Root
+
+const ciao = 'porco'
+const marcello = ciao => console.log(ciao)
+
+marcello('ville')
+

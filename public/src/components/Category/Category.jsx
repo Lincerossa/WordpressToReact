@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 
 import { category } from './Category.scss'
 
-const Category = (props) => {
-
+const Category = ({ category, type }) => {
+  console.log('CategoryData---->',category)
+  console.log('CategoryType---->',type)
   return(
-    <div className={category}>
-      <p>Qui metto singola categoria</p>
+    <div> 
+    singolo Category
     </div>
   )
 }

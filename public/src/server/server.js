@@ -5,52 +5,68 @@ import express from 'express'
 import { get } from 'axios'
 
 import Root from '../Root'
-// import { posts, pages, categories } from '../api'
 
 const app = express()
 
-  const header = `<!DOCTYPE html>
-                  <html>
-                    <head>
-                    <title>Wordpress To React Server</title>
-                    <link rel='stylesheet' href='/dist/scripts/style.css' />
-                    </head>
-                    <body>`
+const page = (content) => `
+  <!DOCTYPE html>
+    <html>
+      <head>
+      <title>Wordpress To React Server</title>
+      <link rel='stylesheet' href='/dist/scripts/style.css' />
+      </head>
+      <body>
+      ${content}
+      <script src='/dist/scripts/main.js' async type='text/javascript'></script>
+    </body>
+  </html>
+`
 
-  const content = (req, type, data) => ReactDOMServer.renderToString(
-                    <StaticRouter location={req.url} context={{}}>
-                      <Root type={type} data={data}/>
-                    </StaticRouter>
-                  )
+const content = (req, type, data) => {
 
-  const footer = `<script src='/dist/scripts/main.js' async type='text/javascript'></script>
-                  </body>
-                </html>`
+  return ReactDOMServer.renderToString(
+    <StaticRouter location={req.url} context={{}}>
+      <Root type={type} data={data}/>
+    </StaticRouter>
+  )
+
+}
+
+app.get('/', async (req, res) => {
+  const data = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/posts')
+  res.set('Content-Type', 'text/html')
+  res.send( page(content(req, 'homePage', data)))
+})
+
+//posts generali
+app.get('/posts', async (req, res) => {
+  const data = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/posts')
+  res.set('Content-Type', 'text/html')
+  res.send( page(content(req, 'posts', data)))
+})
+
+//post singolo
+app.get('/post/:slug', async (req, res) => {
+  const data = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/posts')
+  res.set('Content-Type', 'text/html')
+  res.send( page(content(req, 'post', data)))
+})
+
+//categories
+app.get('/categories', async (req, res) => {
+  const data = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/categories')
+  res.set('Content-Type', 'text/html')
+  res.send( page(content(req, 'categories', data)))
+})
+
+//categories
+app.get('/category/:slug', async (req, res) => {
+  const data = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/categories')
+  res.set('Content-Type', 'text/html')
+  res.send( page(content(req, 'category', data)))
+})
 
 
-  app.get('/posts', async (req, res) => {
-    const CC = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/posts')
-    res.set('Content-Type', 'text/html')
-    res.send(header+content(req, 'posts', CC)+footer);
-  });
-
-
-  app.get('/post/:slug', async (req, res) => {
-    const CCC = await get('http://192.168.33.10/wordpress/wp-json/wp/v2/posts?slug=:slug')
-    res.set('Content-Type', 'text/html')
-    res.send(header+content(req, 'post', CCC)+footer);
-  });
-
-  app.get('/categories/', function (req, res) {
-    res.set('Content-Type', 'text/html')
-    res.send(header+content(req, 'categories')+footer);
-  });
-
-  app.get('/category/:slug', function (req, res) {
-    res.set('Content-Type', 'text/html')
-    res.send(header+content(req, 'category')+footer);
-  });
-
-  app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-  });
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+})
