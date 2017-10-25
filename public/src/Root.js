@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 // import routes from './server/routes'
-import { Post, Posts, Page, Category, Header } from './components'
+import { Posts, Post, Page, Categories, Category, Header } from './components'
 
 const Root = ({ data, type, categories }) => {
 

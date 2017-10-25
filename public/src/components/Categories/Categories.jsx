@@ -9,6 +9,7 @@ const Categories = ({ categories, type }) => {
   return(
     <div> 
     tutte le categories
+    <Link to={`/category/first-category`}>vado ad una categoria</Link>
     </div>
   )
 }

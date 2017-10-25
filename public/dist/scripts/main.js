@@ -25655,7 +25655,7 @@ var Root = function Root(_ref) {
   };
 
   var MyCategories = function MyCategories(props) {
-    return _react2.default.createElement(Categories, _extends({
+    return _react2.default.createElement(_components.Categories, _extends({
       categories: data,
       type: type
     }, props));
@@ -25987,7 +25987,12 @@ var Categories = function Categories(_ref) {
   return _react2.default.createElement(
     'div',
     null,
-    'tutte le categories'
+    'tutte le categories',
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { to: '/category/first-category' },
+      'vado ad una categoria'
+    )
   );
 };
 

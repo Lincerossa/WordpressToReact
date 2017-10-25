@@ -10,7 +10,6 @@ const Post = ({ post, type }) => {
     singolo post
     </div>
   )
-
 }
 
 
