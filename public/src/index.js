@@ -5,7 +5,7 @@ import Root from './Root'
 const run = () => {
     ReactDOM.render((
       <BrowserRouter>
-        <Root />
+        <Root data={TT}/>
       </BrowserRouter>
     ), document.getElementById('root'))
 }

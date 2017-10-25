@@ -2400,7 +2400,7 @@ var run = function run() {
   _reactDom2.default.render(_react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
-    _react2.default.createElement(_Root2.default, null)
+    _react2.default.createElement(_Root2.default, { data: TT })
   ), document.getElementById('root'));
 };
 
@@ -25664,6 +25664,7 @@ var Root = function Root(_ref) {
   return _react2.default.createElement(
     'div',
     { className: 'Root', id: 'root' },
+    _react2.default.createElement(_components.Header, null),
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
@@ -25677,14 +25678,6 @@ var Root = function Root(_ref) {
 };
 
 exports.default = Root;
-
-
-var ciao = 'porco';
-var marcello = function marcello(ciao) {
-  return console.log(ciao);
-};
-
-marcello('ville');
 
 /***/ }),
 /* 78 */
@@ -25752,6 +25745,8 @@ Object.defineProperty(exports, 'Header', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+console.log("ciso");
 
 /***/ }),
 /* 79 */

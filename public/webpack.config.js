@@ -45,7 +45,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin("./dist/scripts/style.css"),
     new BundleAnalyzerPlugin({
-      analyzerHost: '192.168.33.10',
+      analyzerHost: 'localhost',
     })
   ]
 }

@@ -48,6 +48,7 @@ const Root = ({ data, type, categories }) => {
 
     return(
       <div className="Root" id="root">
+        <Header />
       	<Switch> 
           <Route exact path='/' component={Page} /> 
           <Route path='/posts/' component={MyPosts}/>
@@ -61,9 +62,3 @@ const Root = ({ data, type, categories }) => {
 }
 
 export default Root
-
-const ciao = 'porco'
-const marcello = ciao => console.log(ciao)
-
-marcello('ville')
-
