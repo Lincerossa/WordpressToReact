@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import Root from './Root'
+import Root from './components/Root.js'
 
-const run = (TT) => {
+const run = PROPS => {
     ReactDOM.render((
       <BrowserRouter>
-        <Root data={TT}/>
+        <Root data={PROPS}/>
       </BrowserRouter>
     ), document.getElementById('root'))
 }
 
-window.addEventListener('DOMContentLoaded', run(), false)
+window.addEventListener('DOMContentLoaded', run(PROPS), false)

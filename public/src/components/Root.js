@@ -1,16 +1,14 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-// import routes from './server/routes'
-import { Posts, Post, Page, Categories, Category, Header } from './components'
+import { Posts, Post, Page, Categories, Category, Header } from './'
 
-const Root = ({ data, type, categories }) => {
+const Root = ({ data }) => {
 
     const MyPosts = (props) => {
       return (
         <Posts 
           posts={data}
-          type={type}
           {...props}
         />
       )
@@ -20,7 +18,6 @@ const Root = ({ data, type, categories }) => {
       return (
         <Post
           post={data}
-          type={type}
           {...props}
         />
       )
@@ -30,7 +27,6 @@ const Root = ({ data, type, categories }) => {
       return (
         <Category
           category={data}
-          type={type}
           {...props}
         />
       )
@@ -40,7 +36,6 @@ const Root = ({ data, type, categories }) => {
       return (
         <Categories
           categories={data}
-          type={type}
           {...props}
         />
       )
@@ -48,7 +43,7 @@ const Root = ({ data, type, categories }) => {
     return(
       <div className="Root" id="root">
         <Header />
-      	<Switch> 
+        <Switch> 
           <Route exact path='/' component={Page} /> 
           <Route path='/posts/' component={MyPosts}/>
           <Route path='/post/:slug' component={MyPost}/>

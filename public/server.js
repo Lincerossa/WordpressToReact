@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router'
 import express from 'express'
 import { get } from 'axios'
 import api from './src/api'
-import Root from './src/Root.js'
+import Root from './src/components/Root'
 
 const page = (req, data, propsToRehydrate ) => `
   <!DOCTYPE html>
@@ -21,7 +21,7 @@ const page = (req, data, propsToRehydrate ) => `
       )}
       <script src='/main.js' async type='text/javascript'></script>
       <script async type='text/javascript'>
-        var TT = ${JSON.stringify(propsToRehydrate.data)}
+        var PROPS = ${JSON.stringify(propsToRehydrate.data)}
       </script>
     </body>
   </html>
