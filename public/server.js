@@ -3,19 +3,15 @@ import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 import express from 'express'
 import { get } from 'axios'
-
-import Root from '../Root'
-
-const app = express()
+import path from 'path'
+import Root from './src/Root.js'
 
 const content = (req, type, data) => {
-
   return ReactDOMServer.renderToString(
     <StaticRouter location={req.url} context={{}}>
       <Root type={type} data={data}/>
     </StaticRouter>
   )
-
 }
 
 const page = (content, propsToRehydrate ) => `
@@ -36,10 +32,8 @@ const page = (content, propsToRehydrate ) => `
 `
 const api = 'http://dev.wordpresstoreact.it/wordpress/wp-json/wp/v2/'
 
-
-console.log("server refreshato ")
-app.use(express.static('scripts'))
-
+const app = express()
+app.use(express.static('dist'))
 app.get('/', async (req, res) => {
   const data = await get(api+'posts')
   res.send( page(content(req, 'homePage', data), data ))

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "webpack --watch",
-    "watch": "BABEL_ENV=server nodemon ./src/server/server.js --exec babel-node"
+    "server": "BABEL_ENV=server nodemon ./server.js --exec babel-node"
   },
   "author": "",
   "license": "ISC",

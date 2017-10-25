@@ -25746,8 +25746,6 @@ Object.defineProperty(exports, 'Header', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log("ciso");
-
 /***/ }),
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
