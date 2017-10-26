@@ -8,25 +8,41 @@ import api from '../../api'
 class Posts extends Component{
 
   constructor(props){
+
+    console.log(props)
     super(props)
     this.state = {
       posts :"",
+      client: false
     }
+
   }
 
-  componentWillMount(){
+  componentWillMount(props){
+      
     get(api.getPosts)
       .then( (posts)=>{
+        console.log("ecco il risultato della chiamata client",posts.data)
         this.setState({
-          posts: posts,
+          posts: posts.data,
+          client: true
         }) 
       })
 
   }
 
+  componentShouldUpdate(nextProps){
+    console.log('comp should upd', props)
+  }
+
   render(){
-    const { posts }  =  this.state || this.props
-    const POSTS = posts.data || posts
+    let posts;
+    if(this.state.client){
+      posts =  this.state.posts
+    } else {
+      posts = this.props.posts
+    }
+    const POSTS = posts
 
     return(
       <div> 

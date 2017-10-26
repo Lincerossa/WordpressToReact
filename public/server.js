@@ -6,7 +6,7 @@ import { get } from 'axios'
 import api from './src/api'
 import Root from './src/components/Root'
 
-const page = (req, data, propsToRehydrate ) => `
+const layout = (req, data, propsToRehydrate ) => `
   <!DOCTYPE html>
     <html>
       <head>
@@ -16,7 +16,7 @@ const page = (req, data, propsToRehydrate ) => `
       <body>
       ${ReactDOMServer.renderToString(
         <StaticRouter location={req.url} context={{}}>
-          <Root data={data}/>
+          <Root data={data.data}/>
         </StaticRouter>
       )}
       <script src='/main.js' async type='text/javascript'></script>
@@ -32,27 +32,27 @@ app.use(express.static(__dirname + '/dist/scripts'));
 
 app.get('/', async (req, res) => {
   const data = await get(api.getPosts)
-  res.send( page(req, data, data ))
+  res.send( layout(req, data, data ))
 })
 
 app.get('/posts', async (req, res) => {
   const data = await get(api.getPosts)
-  res.send( page(req, data, data ))
+  res.send( layout(req, data, data ))
 })
 
 app.get('/post/:slug', async (req, res) => {
   const data = await get(api.getPosts)
-  res.send( page(req, data, data ))
+  res.send( layout(req, data, data ))
 })
 
 app.get('/categories', async (req, res) => {
   const data = await get(api.getCategories)
-  res.send( page(req, data, data ))
+  res.send( layout(req, data, data ))
 })
 
 app.get('/category/:slug', async (req, res) => {
   const data = await get(api.getCategories)
-  res.send( page(req, data, data ))
+  res.send( layout(req, data, data ))
 })
 
 app.listen(3000, function () {

@@ -26527,32 +26527,46 @@ var Posts = function (_Component) {
   function Posts(props) {
     _classCallCheck(this, Posts);
 
+    console.log(props);
+
     var _this = _possibleConstructorReturn(this, (Posts.__proto__ || Object.getPrototypeOf(Posts)).call(this, props));
 
     _this.state = {
-      posts: ""
+      posts: "",
+      client: false
     };
+
     return _this;
   }
 
   _createClass(Posts, [{
     key: 'componentWillMount',
-    value: function componentWillMount() {
+    value: function componentWillMount(props) {
       var _this2 = this;
 
       (0, _axios.get)(_api2.default.getPosts).then(function (posts) {
+        console.log("ecco il risultato della chiamata client", posts.data);
         _this2.setState({
-          posts: posts
+          posts: posts.data,
+          client: true
         });
       });
     }
   }, {
+    key: 'componentShouldUpdate',
+    value: function componentShouldUpdate(nextProps) {
+      console.log('comp should upd', props);
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _ref = this.state || this.props,
-          posts = _ref.posts;
-
-      var POSTS = posts.data || posts;
+      var posts = void 0;
+      if (this.state.client) {
+        posts = this.state.posts;
+      } else {
+        posts = this.props.posts;
+      }
+      var POSTS = posts;
 
       return _react2.default.createElement(
         'div',
@@ -27589,7 +27603,7 @@ var Categories = function Categories(_ref) {
   var categories = _ref.categories;
 
 
-  var cat = categories.data || categories;
+  var cat = categories;
 
   return _react2.default.createElement(
     'div',

@@ -5,7 +5,7 @@ import { categories } from './Categories.scss'
 
 const Categories = ({ categories }) => {
 
-  const cat = categories.data || categories
+  const cat = categories
 
   return(
     <div> 
