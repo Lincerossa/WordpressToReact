@@ -9,7 +9,6 @@ class Posts extends Component{
 
   constructor(props){
 
-    console.log(props)
     super(props)
     this.state = {
       posts :"",
@@ -22,7 +21,6 @@ class Posts extends Component{
       
     get(api.getPosts)
       .then( (posts)=>{
-        console.log("ecco il risultato della chiamata client",posts.data)
         this.setState({
           posts: posts.data,
           client: true
@@ -31,18 +29,19 @@ class Posts extends Component{
 
   }
 
-  componentShouldUpdate(nextProps){
-    console.log('comp should upd', props)
-  }
+  // shouldComponentUpdate(nextProps){
+  //   if(this.props.posts !== nextProps.posts){
+  //     console.log('comp should upd')
+  //     return true
+  //   } {
+  //     return false
+  //   }
+    
+  // }
 
   render(){
-    let posts;
-    if(this.state.client){
-      posts =  this.state.posts
-    } else {
-      posts = this.props.posts
-    }
-    const POSTS = posts
+
+    const POSTS = this.state.client ? this.state.posts : this.props.posts
 
     return(
       <div> 
