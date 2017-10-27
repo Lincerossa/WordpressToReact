@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import { Posts, Post, Page, Categories, Category, Header } from './'
+import { system } from '../utility'
 
 const Root = ({ data }) => {
 
@@ -10,8 +11,10 @@ const Root = ({ data }) => {
   const MyCategory = props => <Category category={data} {...props} />
   const MyCategories = props => <Categories categories={data} {...props} />
 
+
   return(
-    <div className="Root" id="root">
+
+    <div className={system} id={system}>
       <Header />
       <Switch> 
         <Route exact path='/' component={Page} /> 

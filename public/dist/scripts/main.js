@@ -26301,6 +26301,8 @@ var _reactRouterDom = __webpack_require__(7);
 
 var _ = __webpack_require__(85);
 
+var _utility = __webpack_require__(141);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Root = function Root(_ref) {
@@ -26322,7 +26324,7 @@ var Root = function Root(_ref) {
 
   return _react2.default.createElement(
     'div',
-    { className: 'Root', id: 'root' },
+    { className: _utility.system, id: _utility.system },
     _react2.default.createElement(_.Header, null),
     _react2.default.createElement(
       _reactRouterDom.Switch,
@@ -27963,6 +27965,53 @@ module.exports = {"menu":"menu___2w9pn","menuCategories":"menuCategories___2bC6D
 
 // removed by extract-text-webpack-plugin
 module.exports = {"Header":"Header___1_1R8","HeaderLogo":"HeaderLogo___2W-f4"};
+
+/***/ }),
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _system = __webpack_require__(142);
+
+Object.defineProperty(exports, 'system', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_system).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var system = typeof window === 'undefined' ? 'root' : 'client';
+
+exports.default = system;
 
 /***/ })
 /******/ ]);
