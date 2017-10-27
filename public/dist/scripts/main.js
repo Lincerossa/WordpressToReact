@@ -26301,7 +26301,7 @@ var _reactRouterDom = __webpack_require__(7);
 
 var _ = __webpack_require__(85);
 
-var _utility = __webpack_require__(141);
+var _utility = __webpack_require__(130);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26541,27 +26541,18 @@ var Posts = function (_Component) {
 
   _createClass(Posts, [{
     key: 'componentWillMount',
-    value: function componentWillMount(props) {
-      var _this2 = this;
+    value: async function componentWillMount() {
 
-      (0, _axios.get)(_api2.default.getPosts).then(function (posts) {
-        _this2.setState({
+      var posts = await (0, _axios.get)(_api2.default.getPosts);
+
+      if (JSON.stringify(posts.data) !== JSON.stringify(this.props.posts)) {
+
+        this.setState({
           posts: posts.data,
           client: true
         });
-      });
+      }
     }
-
-    // shouldComponentUpdate(nextProps){
-    //   if(this.props.posts !== nextProps.posts){
-    //     console.log('comp should upd')
-    //     return true
-    //   } {
-    //     return false
-    //   }
-
-    // }
-
   }, {
     key: 'render',
     value: function render() {
@@ -27965,18 +27956,7 @@ module.exports = {"menu":"menu___2w9pn","menuCategories":"menuCategories___2bC6D
 module.exports = {"Header":"Header___1_1R8","HeaderLogo":"HeaderLogo___2W-f4"};
 
 /***/ }),
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27986,7 +27966,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _system = __webpack_require__(142);
+var _system = __webpack_require__(131);
 
 Object.defineProperty(exports, 'system', {
   enumerable: true,
@@ -27998,7 +27978,7 @@ Object.defineProperty(exports, 'system', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 142 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

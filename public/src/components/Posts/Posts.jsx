@@ -17,27 +17,20 @@ class Posts extends Component{
 
   }
 
-  componentWillMount(props){
-      
-    get(api.getPosts)
-      .then( (posts)=>{
-        this.setState({
-          posts: posts.data,
-          client: true
-        }) 
+  async componentWillMount(){
+
+    const posts  = await get(api.getPosts)
+
+    if( JSON.stringify(posts.data) !== JSON.stringify(this.props.posts) ){
+
+      this.setState({
+        posts: posts.data,
+        client: true
       })
-
+       
+    }
+  
   }
-
-  // shouldComponentUpdate(nextProps){
-  //   if(this.props.posts !== nextProps.posts){
-  //     console.log('comp should upd')
-  //     return true
-  //   } {
-  //     return false
-  //   }
-    
-  // }
 
   render(){
 
