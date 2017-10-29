@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom' 
 
 import { get } from 'axios'
-import style from './Posts.scss'
+import { posts__single } from './Posts.scss'
 import api from '../../api'
 
 class Posts extends Component{
@@ -44,7 +44,7 @@ class Posts extends Component{
         POSTS && POSTS.length > 0 &&
         POSTS.map( (post, key) => {
           if(post.slug && post.title && post.title.rendered){
-            return <p><Link key={key} to={`/post/${post.slug}`}>{post.title.rendered}</Link></p>
+            return <p className={posts__single}><Link key={key} to={`/post/${post.slug}`}>{post.title.rendered}</Link></p>
           }
         })
 

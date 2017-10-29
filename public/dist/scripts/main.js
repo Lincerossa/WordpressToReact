@@ -3075,15 +3075,15 @@ var _Root2 = _interopRequireDefault(_Root);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var renderApp = function renderApp(PROPS) {
+var renderApp = function renderApp(PROPS, GENERALS) {
   _reactDom2.default.render(_react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
-    _react2.default.createElement(_Root2.default, { data: PROPS })
+    _react2.default.createElement(_Root2.default, { data: PROPS, generals: GENERALS })
   ), document.getElementById('root'));
 };
 
-window.addEventListener('DOMContentLoaded', renderApp(PROPS), false);
+window.addEventListener('DOMContentLoaded', renderApp(PROPS, GENERALS), false);
 
 /***/ }),
 /* 43 */
@@ -26306,8 +26306,11 @@ var _utility = __webpack_require__(130);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Root = function Root(_ref) {
-  var data = _ref.data;
+  var data = _ref.data,
+      generals = _ref.generals;
 
+
+  console.log("siiii", generals);
 
   var MyPosts = function MyPosts(props) {
     return _react2.default.createElement(_.Posts, _extends({ posts: data }, props));
@@ -26321,19 +26324,26 @@ var Root = function Root(_ref) {
   var MyCategories = function MyCategories(props) {
     return _react2.default.createElement(_.Categories, _extends({ categories: data }, props));
   };
+  var MyHome = function MyHome(props) {
+    return _react2.default.createElement(_.Home, _extends({ home: data }, props));
+  };
+  var MyPage = function MyPage(props) {
+    return _react2.default.createElement(_.Page, _extends({ page: data }, props));
+  };
 
   return _react2.default.createElement(
     'div',
     { className: _utility.system, id: _utility.system },
-    _react2.default.createElement(_.Header, null),
+    _react2.default.createElement(_.Header, { categories: generals }),
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _.Page }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: MyHome }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/posts/', component: MyPosts }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/post/:slug', component: MyPost }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/category', component: MyCategory }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/categories/', component: MyCategories })
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/categories/', component: MyCategories }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/:slug', component: MyPage })
     )
   );
 };
@@ -26402,6 +26412,15 @@ Object.defineProperty(exports, 'Header', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Header).default;
+  }
+});
+
+var _Home = __webpack_require__(143);
+
+Object.defineProperty(exports, 'Home', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Home).default;
   }
 });
 
@@ -26509,8 +26528,6 @@ var _axios = __webpack_require__(91);
 
 var _Posts = __webpack_require__(110);
 
-var _Posts2 = _interopRequireDefault(_Posts);
-
 var _api = __webpack_require__(111);
 
 var _api2 = _interopRequireDefault(_api);
@@ -26567,7 +26584,7 @@ var Posts = function (_Component) {
           if (post.slug && post.title && post.title.rendered) {
             return _react2.default.createElement(
               'p',
-              null,
+              { className: _Posts.posts__single },
               _react2.default.createElement(
                 _reactRouterDom.Link,
                 { key: key, to: '/post/' + post.slug },
@@ -27673,7 +27690,7 @@ var Page = function Page(props) {
     _react2.default.createElement(
       'p',
       null,
-      'Qui metto la home'
+      'Qui metto una pagina a caso'
     )
   );
 };
@@ -27923,7 +27940,7 @@ var Menu = function Menu(_ref) {
           _reactRouterDom.Link,
           {
             key: key,
-            to: '/' + category.slug,
+            to: '/category/' + category.slug,
             className: _Menu.menuCategory,
             onClick: onClick
           },
@@ -27990,6 +28007,79 @@ Object.defineProperty(exports, "__esModule", {
 var system = typeof window === 'undefined' ? 'root' : 'client';
 
 exports.default = system;
+
+/***/ }),
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Home = __webpack_require__(144);
+
+var _Home2 = _interopRequireDefault(_Home);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Home2.default;
+
+/***/ }),
+/* 144 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(7);
+
+var _Home = __webpack_require__(145);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Home = function Home(props) {
+
+  return _react2.default.createElement(
+    'div',
+    { className: _Home.home },
+    _react2.default.createElement(
+      'p',
+      null,
+      'Qui metto la home'
+    )
+  );
+};
+
+exports.default = Home;
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"home":"home___2nZLK"};
 
 /***/ })
 /******/ ]);

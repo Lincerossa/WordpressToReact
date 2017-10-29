@@ -12,7 +12,7 @@ const Menu = ({ categories, onClick }) => {
         categories.map( (category, key) =>
           <Link 
             key={key} 
-            to={`/${category.slug}`} 
+            to={`/category/${category.slug}`} 
             className={menuCategory} 
             onClick={onClick}
           >{category.name}</Link>
