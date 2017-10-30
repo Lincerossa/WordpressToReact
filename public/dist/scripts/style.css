@@ -4,11 +4,13 @@
 .posts___2LXi3 {
   color: red;
   border: 1px solid blue; }
-.HamburgerIcon___1uGkV {
-  border: 1px solid yellow;
+.hamburger___23-en {
+  color: red; }
+
+.hamburgerIcon___3x7RJ {
   cursor: pointer; }
 
-.HamburgerMenu___111Xl {
+.hamburgerMenu___2Up_h {
   border: 1px solid black; }
 .menu___2w9pn {
   position: fixed;

@@ -14,11 +14,11 @@ const layout = (req, data, generals) => `
       <link rel='stylesheet' href='/style.css' />
       </head>
       <body>
-      ${ReactDOMServer.renderToString(
-        <StaticRouter location={req.url} context={{}}>
-          <Root data={data.data} generals={generals.data}/>
-        </StaticRouter>
-      )}
+      <div id="app">${ReactDOMServer.renderToString(
+          <StaticRouter location={req.url} context={{}}>
+            <Root data={data.data} generals={generals.data}/>
+          </StaticRouter>
+      )}</div>
       <script src='/main.js' async type='text/javascript'></script>
       <script async type='text/javascript'>
         var PROPS = ${JSON.stringify(data.data)}
@@ -32,8 +32,8 @@ const app = express()
 app.use(express.static(__dirname + '/dist/scripts'));
 
 app.get('/', async (req, res) => {
-  let data = await get(api.getPosts)
-  const generals = await get(api.getCategories)
+  let data = ''
+  const generals = ''
   
   res.send( layout(req, data, generals))
 })

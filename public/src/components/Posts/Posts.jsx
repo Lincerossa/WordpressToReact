@@ -38,6 +38,7 @@ class Posts extends Component{
 
     return(
       <div> 
+      
       tutti i posts:
 
       {

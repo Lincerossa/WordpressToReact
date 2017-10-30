@@ -1,6 +1,6 @@
 import React, { Component } from 'react'	
 
-import style from './Hamburger.scss'
+import { hamburger, hamburgerIcon, hamburgerMenu } from './Hamburger.scss'
 import Menu from '../Menu'
 
 class Hamburger extends Component {
@@ -25,14 +25,14 @@ class Hamburger extends Component {
     const { isOpen } = this.state
 
   	return(
-	  	<div className={style.Hamburger}>
-        <div className={style.HamburgerIcon} onClick={this.handleClick} >
-          qui icona Hamburger
+	  	<div className={hamburger}>
+        <div className={hamburgerIcon} onClick={this.handleClick} >
+            asd
         </div>
 
 		    {
 		    	categories && isOpen &&
-          <div className={style.HamburgerMenu}>
+          <div className={hamburgerMenu}>
             <Menu categories={categories} onClick={this.handleClick} />
           </div>
 		    }

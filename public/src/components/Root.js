@@ -6,7 +6,7 @@ import { system } from '../utility'
 
 const Root = ({ data, generals }) => {
 
-  console.log("siiii", generals)
+  console.log("cambiato")
 
   const MyPosts = props => <Posts posts={data} {...props} />
   const MyPost = props => <Post post={data} {...props} />
@@ -18,7 +18,7 @@ const Root = ({ data, generals }) => {
 
   return(
 
-    <div className={system} id={system}>
+    <div>
       <Header categories={generals} />
       <Switch> 
         <Route exact path='/' component={MyHome} /> 
