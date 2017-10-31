@@ -5,6 +5,8 @@ import { menu, menuCategory, menuCategories, menuClose } from './Menu.scss'
 
 const Menu = ({ categories, onClick }) => {
 
+  console.log('asdasd', menu)
+
   return(
     <div className={menu}>
       <div className={menuCategories}>

@@ -26310,8 +26310,6 @@ var Root = function Root(_ref) {
       generals = _ref.generals;
 
 
-  console.log("cambiato");
-
   var MyPosts = function MyPosts(props) {
     return _react2.default.createElement(_.Posts, _extends({ posts: data }, props));
   };
@@ -26331,19 +26329,23 @@ var Root = function Root(_ref) {
     return _react2.default.createElement(_.Page, _extends({ page: data }, props));
   };
 
+  var yourHandler = function yourHandler() {
+    console.log("cambiato");
+  };
+
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'Root' },
     _react2.default.createElement(_.Header, { categories: generals }),
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: MyHome }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/posts/', component: MyPosts }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/post/:slug', component: MyPost }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/category', component: MyCategory }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/categories/', component: MyCategories }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/:slug', component: MyPage })
+      _react2.default.createElement(_reactRouterDom.Route, { onChange: yourHandler(), exact: true, path: '/', component: MyHome }),
+      _react2.default.createElement(_reactRouterDom.Route, { onChange: yourHandler(), path: '/posts/', component: MyPosts }),
+      _react2.default.createElement(_reactRouterDom.Route, { onChange: yourHandler(), path: '/post/:slug', component: MyPost }),
+      _react2.default.createElement(_reactRouterDom.Route, { onChange: yourHandler(), path: '/category', component: MyCategory }),
+      _react2.default.createElement(_reactRouterDom.Route, { onChange: yourHandler(), path: '/categories/', component: MyCategories }),
+      _react2.default.createElement(_reactRouterDom.Route, { onChange: yourHandler(), path: '/:slug', component: MyPage })
     )
   );
 };
@@ -27926,6 +27928,8 @@ var Menu = function Menu(_ref) {
   var categories = _ref.categories,
       onClick = _ref.onClick;
 
+
+  console.log('asdasd', _Menu.menu);
 
   return _react2.default.createElement(
     'div',

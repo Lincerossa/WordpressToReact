@@ -6,7 +6,6 @@ import { system } from '../utility'
 
 const Root = ({ data, generals }) => {
 
-  console.log("cambiato")
 
   const MyPosts = props => <Posts posts={data} {...props} />
   const MyPost = props => <Post post={data} {...props} />
@@ -15,18 +14,21 @@ const Root = ({ data, generals }) => {
   const MyHome = props => <Home home={data} {...props} />
   const MyPage = props => <Page page={data} {...props} />
 
+  const yourHandler = () => {
+    console.log("cambiato")
+  }
 
   return(
 
-    <div>
+    <div className="Root">
       <Header categories={generals} />
-      <Switch> 
-        <Route exact path='/' component={MyHome} /> 
-        <Route path='/posts/' component={MyPosts}/>
-        <Route path='/post/:slug' component={MyPost}/>
-        <Route path='/category' component={MyCategory}/>
-        <Route path='/categories/' component={MyCategories}/>  
-        <Route path='/:slug' component={MyPage}/>  
+      <Switch > 
+        <Route onChange={yourHandler()} exact path='/' component={MyHome} /> 
+        <Route onChange={yourHandler()} path='/posts/' component={MyPosts}/>
+        <Route onChange={yourHandler()} path='/post/:slug' component={MyPost}/>
+        <Route onChange={yourHandler()} path='/category' component={MyCategory}/>
+        <Route onChange={yourHandler()} path='/categories/' component={MyCategories}/>  
+        <Route onChange={yourHandler()} path='/:slug' component={MyPage}/>  
       </Switch>
     </div>
   )

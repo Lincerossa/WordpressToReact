@@ -3,6 +3,10 @@ import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 import express from 'express'
 import { get } from 'axios'
+
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
 import api from './src/api'
 import Root from './src/components/Root'
 
@@ -21,13 +25,14 @@ const layout = (req, data, generals) => `
       )}</div>
       <script src='/main.js' async type='text/javascript'></script>
       <script async type='text/javascript'>
-        var PROPS = ${JSON.stringify(data.data)}
-        var GENERALS = ${JSON.stringify(generals.data)}
+        window.PROPS = ${JSON.stringify(data.data)}
+        window.GENERALS = ${JSON.stringify(generals.data)}
       </script>
     </body>
   </html>
 `
 const app = express()
+const port = 3000
 
 app.use(express.static(__dirname + '/dist/scripts'));
 
@@ -74,6 +79,6 @@ app.get('/:slug', async (req, res) => {
 })
 
 
-app.listen(3000, function () {
+app.listen(port, () => {
   console.log('Example app listening on port 3000!');
 })
