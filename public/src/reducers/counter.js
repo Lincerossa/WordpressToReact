@@ -1,12 +1,15 @@
-const counter = (state = 0, action) =>{
-  switch(action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
-    default:
-      return state
-  }
-}
+import {COUNTER__INCREMENT} from '../constants';
+import {COUNTER__DECREMENT} from '../constants';
 
-export default counter
+const counter = (count = 0, action) => {
+  switch (action.type) {
+    case COUNTER__INCREMENT:
+      return count + 1;
+    case COUNTER__DECREMENT:
+      return count - 1;
+    default:
+      return count
+  }
+};
+
+export default counter;
