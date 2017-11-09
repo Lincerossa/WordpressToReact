@@ -1,5 +1,5 @@
-import { HAMBURGER__OPEN } from '../constants';
-import { HAMBURGER__CLOSE } from '../constants';
+import { HAMBURGER__OPEN } from '../actions';
+import { HAMBURGER__CLOSE } from '../actions';
 
 const hamburger = (open = false, action) => {
   switch (action.type) {

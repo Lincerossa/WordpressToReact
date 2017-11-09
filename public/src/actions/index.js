@@ -1,7 +1,7 @@
-import { COUNTER__INCREMENT } from '../constants'
-import { COUNTER__DECREMENT } from '../constants'
-import { HAMBURGER__CLOSE } from '../constants'
-import { HAMBURGER__OPEN } from '../constants'
+export const COUNTER__INCREMENT =  'COUNTER__INCREMENT'
+export const COUNTER__DECREMENT = 'COUNTER__DECREMENT'
+export const HAMBURGER__CLOSE = 'HAMBURGER__CLOSE'
+export const HAMBURGER__OPEN = 'HAMBURGER__OPEN'
 
 export const counterIncrement = (initialState) => {
   return { type: COUNTER__INCREMENT, initialState }

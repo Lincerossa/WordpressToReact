@@ -28470,16 +28470,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _constants = __webpack_require__(15);
+var _actions = __webpack_require__(176);
 
 var counter = function counter() {
   var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var action = arguments[1];
 
   switch (action.type) {
-    case _constants.COUNTER__INCREMENT:
+    case _actions.COUNTER__INCREMENT:
       return count + 1;
-    case _constants.COUNTER__DECREMENT:
+    case _actions.COUNTER__DECREMENT:
       return count - 1;
     default:
       return count;
@@ -28499,16 +28499,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _constants = __webpack_require__(15);
+var _actions = __webpack_require__(176);
 
 var hamburger = function hamburger() {
   var open = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   var action = arguments[1];
 
   switch (action.type) {
-    case _constants.HAMBURGER__CLOSE:
+    case _actions.HAMBURGER__CLOSE:
       return false;
-    case _constants.HAMBURGER__OPEN:
+    case _actions.HAMBURGER__OPEN:
       return true;
     default:
       return open;
@@ -30311,24 +30311,25 @@ exports.default = system;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.hamburgerOpen = exports.hamburgerClose = exports.counterDecrement = exports.counterIncrement = undefined;
-
-var _constants = __webpack_require__(15);
+var COUNTER__INCREMENT = exports.COUNTER__INCREMENT = 'COUNTER__INCREMENT';
+var COUNTER__DECREMENT = exports.COUNTER__DECREMENT = 'COUNTER__DECREMENT';
+var HAMBURGER__CLOSE = exports.HAMBURGER__CLOSE = 'HAMBURGER__CLOSE';
+var HAMBURGER__OPEN = exports.HAMBURGER__OPEN = 'HAMBURGER__OPEN';
 
 var counterIncrement = exports.counterIncrement = function counterIncrement(initialState) {
-  return { type: _constants.COUNTER__INCREMENT, initialState: initialState };
+  return { type: COUNTER__INCREMENT, initialState: initialState };
 };
 
 var counterDecrement = exports.counterDecrement = function counterDecrement(initialState) {
-  return { type: _constants.COUNTER__DECREMENT, initialState: initialState };
+  return { type: COUNTER__DECREMENT, initialState: initialState };
 };
 
 var hamburgerClose = exports.hamburgerClose = function hamburgerClose(initialState) {
-  return { type: _constants.HAMBURGER__CLOSE, initialState: initialState };
+  return { type: HAMBURGER__CLOSE, initialState: initialState };
 };
 
 var hamburgerOpen = exports.hamburgerOpen = function hamburgerOpen(initialState) {
-  return { type: _constants.HAMBURGER__OPEN, initialState: initialState };
+  return { type: HAMBURGER__OPEN, initialState: initialState };
 };
 
 /***/ })
