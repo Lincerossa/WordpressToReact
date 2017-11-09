@@ -5,10 +5,13 @@
   color: red;
   border: 1px solid blue; }
 .hamburger___23-en {
-  color: red; }
+  color: red;
+  height: 2rem;
+  width: 2rem; }
 
 .hamburgerIcon___3x7RJ {
-  cursor: pointer; }
+  cursor: pointer;
+  height: 100%; }
 
 .hamburgerMenu___2Up_h {
   border: 1px solid black; }

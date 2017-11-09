@@ -1,10 +1,16 @@
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router';
-import express from 'express';
-import { get } from 'axios';
-import api from './src/api';
-import Root from './src/components/Root';
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import { StaticRouter } from 'react-router'
+import express from 'express'
+import { get } from 'axios'
+import { Provider } from 'react-redux';
+import api from './src/api'
+import Root from './src/components/Root'
+import { createStore } from 'redux';
+import rootReducer from './src/reducers';
+
+//ha accesso allo store
+const store = createStore(rootReducer);
 
 const layout = (req, data, generals) => `
   <!DOCTYPE html>
@@ -15,9 +21,11 @@ const layout = (req, data, generals) => `
       </head>
       <body>
       <div id="app">${ReactDOMServer.renderToString(
-        <StaticRouter location={req.url} context={{}}>
-          <Root data={data.data} generals={generals.data}/>
-        </StaticRouter>
+        <Provider store={store}>
+          <StaticRouter location={req.url} context={{}}>
+            <Root data={data.data} generals={generals.data}/>
+          </StaticRouter>
+        </Provider>
       )}</div>
       <script src='/main.js' async type='text/javascript'></script>
       <script async type='text/javascript'>

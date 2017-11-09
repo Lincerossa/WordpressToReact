@@ -6,7 +6,6 @@ import Hamburger from '../Hamburger'
 import style from './Header.scss'
 
 const Header = ({ categories })=> {
-		
 	return(
 	  <div className={style.Header}>
 	  	<Link to='/'><div className={style.HeaderLogo}>qui va logooo</div></Link>

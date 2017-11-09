@@ -4,7 +4,7 @@ import hamburger from './hamburger';
 
 const rootReducer = combineReducers({
   conteggio: counter,
-  hamburger: hamburger,
+  hamburgerIsOpen: hamburger,
 });
 
 export default rootReducer;
