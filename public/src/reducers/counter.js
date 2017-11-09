@@ -1,5 +1,5 @@
-import {COUNTER__INCREMENT} from '../constants';
-import {COUNTER__DECREMENT} from '../constants';
+import { COUNTER__INCREMENT } from '../constants';
+import { COUNTER__DECREMENT } from '../constants';
 
 const counter = (count = 0, action) => {
   switch (action.type) {

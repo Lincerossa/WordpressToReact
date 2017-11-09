@@ -1,6 +1,4 @@
-/*
- * action types
- */
-
-export const COUNTER__INCREMENT = 'COUNTER__INCREMENT'
-export const COUNTER__DECREMENT = 'COUNTER__DECREMENT'
+export const COUNTER__INCREMENT = 'COUNTER__INCREMENT';
+export const COUNTER__DECREMENT = 'COUNTER__DECREMENT';
+export const HAMBURGER__CLOSE = 'HAMBURGER__CLOSE';
+export const HAMBURGER__OPEN = 'HAMBURGER__OPEN';
